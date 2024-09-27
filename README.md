@@ -13,3 +13,8 @@ It is able to run locally and:
 
 ## Running locally
 Assuming you installed it using `uv sync`, use `uv run marvin` to start the assistant.
+
+After the initial model loading, you can wake it by saying "marvin".
+After a moment, you will have 5 seconds to ask your question.
+
+Use CTRL+C to stop the assistant.
