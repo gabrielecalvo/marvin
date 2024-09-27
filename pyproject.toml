@@ -1,0 +1,51 @@
+[project]
+name = "marvin"
+version = "0.1.0"
+description = "Marvin is a very basic AI assistant based on huggingface transformer models"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "datasets>=3.0.0",
+    "sentencepiece>=0.2.0",
+    "sounddevice>=0.5.0",
+    "torch>=2.4.1",
+    "transformers>=4.44.2",
+]
+
+[project.scripts]
+marvin = "marvin.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = true
+dev-dependencies = [
+    "mypy>=1.11.2",
+    "poethepoet>=0.29.0",
+    "ruff>=0.6.8",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+show-fixes = true
+
+[tool.ruff.lint]
+select = ["A", "E", "F", "UP", "I", "W", "SIM", "RUF", "C901", ]
+ignore = ["A002", "A003", "RUF012", ]
+exclude = [".venv", "__ignore__", ]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+disallow_untyped_defs = true
+exclude = "tests|.venv|__ignore__"
+
+[tool.poe.tasks]
+lint = [
+    { shell = "ruff format ." },
+    { shell = "ruff check --fix ." },
+    { shell = "mypy ." }
+]
